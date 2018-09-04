@@ -1,5 +1,12 @@
-Ethereum-Bip44
-==============
+ethereum-bip44-native
+=====================
+
+Forked from [trapp/ethereum-bip44](https://github.com/trapp/ethereum-bip44), changelog:
+
+* Made **AWS Lambda** compatible, removed modules that required local compilation to install.
+* Removed bitcore-lib error "More than one instance of bitcore-lib found", by not importing **bitcore**. Read this readme for more information. (Solves issues/5)
+
+Published in **npm** as [ethereum-bip44-native](https://www.npmjs.com/package/ethereum-bip44-native)
 
 Library to generate Ethereum addresses from a hierarchical deterministic wallet according to the [BIP44 standard](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki).
 
