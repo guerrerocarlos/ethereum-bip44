@@ -30,7 +30,7 @@ Initialize from an existing private seed:
 var bitcore = require('bitcore-lib');
 var EthereumBip44 = require('ethereum-bip44');
 // create the hd wallet
-var wallet = EthereumBip44.fromPrivateSeed('xprv9s21ZrQH143K4BX2reUURqR54XkNhbNkFhEiRQqFkzu5z7T1dp9eMGozFTgKVu5Bs6R8Wd8BuhcJ3rj3LvzJvkc9uBc5xdhstRfJgcTLsjk');
+var wallet = EthereumBip44(bitcore.HDPrivateKey('xprv9s21ZrQH143K4BX2reUURqR54XkNhbNkFhEiRQqFkzu5z7T1dp9eMGozFTgKVu5Bs6R8Wd8BuhcJ3rj3LvzJvkc9uBc5xdhstRfJgcTLsjk'));
 // output the first address
 console.log(wallet.getAddress(0));
 // output the second address
@@ -44,7 +44,7 @@ var EthereumBip44 = require('ethereum-bip44');
 var key = new bitcore.HDPrivateKey();
 var derivedPubKey = key.derive("m/44'/60'/0'/0").hdPublicKey;
 // create the hd wallet
-var wallet = EthereumBip44.fromPublicSeed(derivedPubKey.toString());
+var wallet = EthereumBip44(derivedPubKey);
 // output the first address
 console.log(wallet.getAddress(0));
 // output the second address
