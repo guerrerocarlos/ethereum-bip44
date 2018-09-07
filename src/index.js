@@ -1,5 +1,4 @@
 import { pubToAddress } from 'ethereumjs-util';
-import { HDPrivateKey, HDPublicKey } from 'bitcore-lib';
 import assert from 'assert';
 var ec = require('elliptic').ec('secp256k1');
 
@@ -15,12 +14,12 @@ function padTo32(msg) {
 
 export default class EthereumBIP44 {
 
-    static fromPublicSeed(seed) {
-        return new EthereumBIP44(new HDPublicKey(seed));
+    static fromPublicSeed(seed, bitcoreInstance) {
+        return new EthereumBIP44(new bitcoreInstance.HDPublicKey(seed));
     }
 
-    static fromPrivateSeed(seed) {
-        return new EthereumBIP44(new HDPrivateKey(seed));
+    static fromPrivateSeed(seed, bitcoreInstance) {
+        return new EthereumBIP44(new bitcoreInstance.HDPrivateKey(seed));
     }
 
     static bip32PublicToEthereumPublic(pubKey) {
@@ -29,7 +28,7 @@ export default class EthereumBIP44 {
     }
 
     constructor(hdKey) {
-
+        
         this.parts = [
             `44'`, // bip 44
             `60'`,  // coin
@@ -48,7 +47,6 @@ export default class EthereumBIP44 {
     }
 
     getAddress(index) {
-
         let path = this.parts.slice(this.key.depth);
         let derived = this.key.derive('m/' + (path.length > 0 ? path.join('/') + '/' : "") + index);
         let address = pubToAddress(
