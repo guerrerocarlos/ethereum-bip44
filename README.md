@@ -1,5 +1,12 @@
-Ethereum-Bip44
-==============
+ethereum-bip44-native
+=====================
+
+Forked from [trapp/ethereum-bip44](https://github.com/trapp/ethereum-bip44), changelog:
+
+* Made **AWS Lambda** compatible, removed modules that required local compilation to install.
+* Removed bitcore-lib error "More than one instance of bitcore-lib found", by not importing **bitcore**. Read this readme for more information. (Solves issues/5)
+
+Published in **npm** as [ethereum-bip44-native](https://www.npmjs.com/package/ethereum-bip44-native)
 
 Library to generate Ethereum addresses from a hierarchical deterministic wallet according to the [BIP44 standard](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki).
 
@@ -30,7 +37,7 @@ Initialize from an existing private seed:
 var bitcore = require('bitcore-lib');
 var EthereumBip44 = require('ethereum-bip44');
 // create the hd wallet
-var wallet = EthereumBip44.fromPrivateSeed('xprv9s21ZrQH143K4BX2reUURqR54XkNhbNkFhEiRQqFkzu5z7T1dp9eMGozFTgKVu5Bs6R8Wd8BuhcJ3rj3LvzJvkc9uBc5xdhstRfJgcTLsjk');
+var wallet = EthereumBip44(bitcore.HDPrivateKey('xprv9s21ZrQH143K4BX2reUURqR54XkNhbNkFhEiRQqFkzu5z7T1dp9eMGozFTgKVu5Bs6R8Wd8BuhcJ3rj3LvzJvkc9uBc5xdhstRfJgcTLsjk'));
 // output the first address
 console.log(wallet.getAddress(0));
 // output the second address
@@ -44,7 +51,7 @@ var EthereumBip44 = require('ethereum-bip44');
 var key = new bitcore.HDPrivateKey();
 var derivedPubKey = key.derive("m/44'/60'/0'/0").hdPublicKey;
 // create the hd wallet
-var wallet = EthereumBip44.fromPublicSeed(derivedPubKey.toString());
+var wallet = EthereumBip44(derivedPubKey);
 // output the first address
 console.log(wallet.getAddress(0));
 // output the second address
